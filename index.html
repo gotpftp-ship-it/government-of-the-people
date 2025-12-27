@@ -38,15 +38,14 @@ button:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 6px 18px rgba(0
 .lp-circle:nth-child(3){animation:glow 2s infinite alternate 0.5s;}
 .lp-circle:nth-child(5){animation:glow 2s infinite alternate 1s;}
 @keyframes glow{0%{box-shadow:0 0 10px #00ff6a,0 0 20px #00ff6a;transform:scale(1);}50%{box-shadow:0 0 20px #00ff6a,0 0 30px #00ff6a;transform:scale(1.1);}100%{box-shadow:0 0 10px #00ff6a,0 0 20px #00ff6a;transform:scale(1);}}
-.lp-circle::after{content:"";position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);background:#00ff6a;color:#000;padding:8px 12px;border-radius:8px;font-size:0.9rem;font-weight:bold;opacity:0;pointer-events:none;transition:opacity 0.3s;white-space:nowrap;}
-.lp-circle:hover::after{opacity:0.95;}
 .lp-arrow{font-size:2rem;margin:0 10px;color:#00ff6a;animation:pulse 1.5s infinite;}
 .lp-arrow:nth-child(2){animation-delay:0s;}
 .lp-arrow:nth-child(4){animation-delay:0.5s;}
 @keyframes pulse{0%{transform:scale(1);opacity:0.6;}50%{transform:scale(1.3);opacity:1;}100%{transform:scale(1);opacity:0.6;}}
 .lp-texts{display:flex;justify-content:space-between;max-width:600px;margin-top:10px;flex-wrap:wrap;}
 .lp-text{width:180px;font-size:1.1rem;text-align:center;margin:10px;opacity:0.4;transition:opacity 0.5s, transform 0.5s;position:relative;}
-.token-dot{width:10px;height:10px;background:#00ff6a;border-radius:50%;position:absolute;top:50%;left:0;transform:translate(-50%,-50%);}
+.token-dot{width:12px;height:12px;background:#00ff6a;border-radius:50%;position:absolute;top:0;left:0;cursor:pointer;box-shadow:0 0 5px #00ff6a;}
+.tooltip{position:absolute;background:#00ff6a;color:#000;padding:6px 12px;border-radius:8px;font-size:0.9rem;font-weight:bold;opacity:0;pointer-events:none;transition:opacity 0.3s;z-index:999;}
 footer{margin-top:60px;font-size:1rem;opacity:0.7;}
 @media screen and (max-width:600px){h1{font-size:2.2rem;}h2{font-size:1.6rem;}.buttons a{padding:12px 25px;}.lp-step{flex-direction:column;}.lp-arrow{margin:10px 0;}.lp-text{width:100%;max-width:250px;margin:5px 0;}}
 </style>
@@ -125,7 +124,7 @@ function copyAddress(){
   navigator.clipboard.writeText(address).then(()=>{const btn=document.querySelector('button[onclick="copyAddress()"]'); btn.innerText='Copied!'; setTimeout(()=>{btn.innerText='Copy Address';},1500);}).catch(()=>{alert('Failed to copy.');});
 }
 
-// MATRIX CODE
+// MATRIX BACKGROUND
 const canvas=document.getElementById('matrix');
 const ctx=canvas.getContext('2d');
 canvas.width=window.innerWidth;
@@ -139,29 +138,60 @@ function draw(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,c
 setInterval(draw,50);
 window.addEventListener('resize',()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
 
-// LP Text Animation
-const texts = [document.getElementById('text1'),document.getElementById('text2'),document.getElementById('text3')];
+// LP TEXT ANIMATION
+const texts=[document.getElementById('text1'),document.getElementById('text2'),document.getElementById('text3')];
 let current=0;
 setInterval(()=>{texts.forEach((t,i)=>{t.style.opacity=(i===current?1:0.4);t.style.transform=(i===current?'translateY(-5px)':'translateY(0)');});current=(current+1)%texts.length;},1500);
 
-// TOKEN DOT ANIMATION
+// TOKEN DOTS ALONG CURVED PATH
 const lpStep=document.getElementById('lpStep');
 const circles=lpStep.querySelectorAll('.lp-circle');
 const dots=[];
-
+const tooltips=[];
+const paths=[
+  {from:circles[0],to:circles[2]},
+  {from:circles[2],to:circles[4]},
+  {from:circles[0],to:circles[4]} // extra if you want multi path
+];
 for(let i=0;i<3;i++){
   const dot=document.createElement('div');
   dot.className='token-dot';
   lpStep.appendChild(dot);
-  dots.push({el:dot,pos:0});
+  dots.push({el:dot,progress:0,pathIndex:i%2});
+  
+  const tip=document.createElement('div');
+  tip.className='tooltip';
+  tip.innerText='';
+  document.body.appendChild(tip);
+  tooltips.push(tip);
+
+  dot.addEventListener('click',()=>{
+    const randomProfit=(Math.random()*0.02+0.001).toFixed(3)+' tokens';
+    tip.innerText='Early investor bonus: '+randomProfit;
+    const rect=dot.getBoundingClientRect();
+    tip.style.left=(rect.left+rect.width/2)+'px';
+    tip.style.top=(rect.top-30)+'px';
+    tip.style.opacity=1;
+    setTimeout(()=>{tip.style.opacity=0;},2000);
+  });
 }
 
+// CURVED PATH FUNCTION
 function animateTokens(){
-  const positions=[circles[0].offsetLeft,circles[2].offsetLeft,circles[4].offsetLeft];
-  dots.forEach((d,i)=>{
-    d.pos+=2;
-    if(d.pos>positions[i]+60){d.pos=positions[i];}
-    d.el.style.left=d.pos+'px';
+  dots.forEach(d=>{
+    const path=paths[d.pathIndex];
+    const rectFrom=path.from.getBoundingClientRect();
+    const rectTo=path.to.getBoundingClientRect();
+    d.progress+=0.01;
+    if(d.progress>1)d.progress=0;
+    // Quadratic Bezier curve
+    const cx=(rectFrom.left+rectTo.left)/2;
+    const cy=rectFrom.top-50; // curve height
+    const t=d.progress;
+    const x=(1-t)*(1-t)*rectFrom.left+2*(1-t)*t*cx+t*t*rectTo.left;
+    const y=(1-t)*(1-t)*rectFrom.top+2*(1-t)*t*cy+t*t*rectTo.top;
+    d.el.style.left=x+'px';
+    d.el.style.top=y+'px';
   });
   requestAnimationFrame(animateTokens);
 }
