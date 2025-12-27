@@ -143,16 +143,7 @@ function copyAddress() {
 </script>
 
 
-<script>
-function copyAddress() {
-  const address = document.getElementById('contract-address').innerText;
-  navigator.clipboard.writeText(address).then(() => {
-    alert('Contract address copied!');
-  }).catch(() => {
-    alert('Failed to copy. Please copy manually.');
-  });
-}
-</script>
+
 
 
 
