@@ -6,12 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0b0b0b;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
       color: #f2f2f2;
       text-align: center;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
     }
 
     .container {
@@ -21,33 +31,50 @@
     }
 
     h1 {
-      font-size: 2.7rem;
-      margin-bottom: 5px;
+      font-size: 3rem;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #00ffe0, #00ff99);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientText 3s ease infinite alternate;
+    }
+
+    @keyframes gradientText {
+      0% {background-position:0% 50%;}
+      100% {background-position:100% 50%;}
     }
 
     h2 {
       margin-top: 50px;
-      font-size: 1.8rem;
+      font-size: 2rem;
+      color: #00ffd5;
     }
 
     p {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       line-height: 1.7;
-      opacity: 0.92;
+      opacity: 0.95;
     }
 
     .highlight {
       color: #00ff99;
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
     }
 
     .box {
-      background: #141414;
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 25px;
+      border-radius: 15px;
+      margin-top: 25px;
       text-align: left;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
     }
 
     .box ul {
@@ -62,24 +89,53 @@
     }
 
     .buttons {
-      margin-top: 30px;
+      margin-top: 35px;
     }
 
     .buttons a {
       display: inline-block;
       margin: 10px;
-      padding: 14px 30px;
-      border-radius: 8px;
+      padding: 16px 40px;
+      border-radius: 20px;
       text-decoration: none;
       font-weight: bold;
-      background: #00ff99;
+      background: linear-gradient(270deg, #00ff99, #00ffd5);
+      background-size: 400% 400%;
       color: #0b0b0b;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: gradientButton 3s ease infinite;
+    }
+
+    @keyframes gradientButton {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
+
+    .buttons a:hover {
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+
+    button {
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
     }
 
     footer {
       margin-top: 60px;
-      font-size: 0.9rem;
-      opacity: 0.6;
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+
+    @media screen and (max-width: 600px) {
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.6rem; }
+      .buttons a { padding: 12px 25px; }
     }
   </style>
 </head>
@@ -106,46 +162,42 @@
       <a href="https://pump.fun/coin/ARLAiomvL2HxoBNrawF2FoFMZKp3zFFJFN7Tq3bNpump" target="_blank">Buy on pump.fun</a>
       <a href="https://x.com/GovOfThePeopleX" target="_blank">Twitter / X</a>
     </div>
-<!-- CONTRACT ADDRESS -->
-<div class="box" style="text-align:center; margin-top:20px;">
-  <p><strong>Contract Address:</strong></p>
-  <p id="contract-address" style="word-break: break-all;">
-    ARLAiomvL2HxoBNrawF2FoFMZKp3zFFJFN7Tq3bNpump
-  </p>
-  <button onclick="copyAddress()" style="
-      margin-top:10px;
-      padding:10px 20px;
-      border:none;
-      border-radius:5px;
-      background:#00ff99;
-      color:#0b0b0b;
-      font-weight:bold;
-      cursor:pointer;
-      transition: background 0.2s ease;
-    " 
-    onmouseover="this.style.background='#00cc77'" 
-    onmouseout="this.style.background='#00ff99'">
-    Copy Address
-  </button>
-</div>
 
-<script>
-function copyAddress() {
-  const address = document.getElementById('contract-address').innerText;
-  navigator.clipboard.writeText(address).then(() => {
-    const btn = document.querySelector('button[onclick="copyAddress()"]');
-    btn.innerText = 'Copied!';
-    setTimeout(() => { btn.innerText = 'Copy Address'; }, 1500);
-  }).catch(() => {
-    alert('Failed to copy. Please copy manually.');
-  });
-}
-</script>
+    <!-- CONTRACT ADDRESS -->
+    <div class="box" style="text-align:center; margin-top:25px;">
+      <p><strong>Contract Address:</strong></p>
+      <p id="contract-address" style="word-break: break-all;">
+        ARLAiomvL2HxoBNrawF2FoFMZKp3zFFJFN7Tq3bNpump
+      </p>
+      <button onclick="copyAddress()" style="
+          margin-top:12px;
+          padding:12px 25px;
+          border:none;
+          border-radius:15px;
+          background: linear-gradient(270deg, #00ff99, #00ffd5);
+          background-size: 400% 400%;
+          color:#0b0b0b;
+          font-weight:bold;
+          cursor:pointer;
+        " 
+        onmouseover="this.style.background='linear-gradient(270deg, #00cc77, #00e5c5)'" 
+        onmouseout="this.style.background='linear-gradient(270deg, #00ff99, #00ffd5)'">
+        Copy Address
+      </button>
+    </div>
 
-
-
-
-
+    <script>
+    function copyAddress() {
+      const address = document.getElementById('contract-address').innerText;
+      navigator.clipboard.writeText(address).then(() => {
+        const btn = document.querySelector('button[onclick="copyAddress()"]');
+        btn.innerText = 'Copied!';
+        setTimeout(() => { btn.innerText = 'Copy Address'; }, 1500);
+      }).catch(() => {
+        alert('Failed to copy. Please copy manually.');
+      });
+    }
+    </script>
 
     <!-- WHY -->
     <h2>What is our Goal</h2>
