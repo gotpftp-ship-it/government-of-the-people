@@ -11,7 +11,7 @@
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
+      background: linear-gradient(-45deg, #0f1c2f, #1b2a44, #0f1c2f);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
       color: #f2f2f2;
@@ -28,12 +28,13 @@
       max-width: 900px;
       margin: auto;
       padding: 40px 20px;
+      position: relative;
     }
 
     h1 {
       font-size: 3rem;
       margin-bottom: 10px;
-      background: linear-gradient(90deg, #00ffe0, #00ff99);
+      background: linear-gradient(90deg, #1e3c72, #2a5298);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: gradientText 3s ease infinite alternate;
@@ -47,7 +48,7 @@
     h2 {
       margin-top: 50px;
       font-size: 2rem;
-      color: #00ffd5;
+      color: #00b894;
     }
 
     p {
@@ -57,13 +58,13 @@
     }
 
     .highlight {
-      color: #00ff99;
+      color: #00b894;
       font-weight: bold;
       font-size: 1.2rem;
     }
 
     .box {
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(26, 31, 44, 0.8);
       padding: 25px;
       border-radius: 15px;
       margin-top: 25px;
@@ -84,7 +85,7 @@
 
     .box ul li::before {
       content: "✓ ";
-      color: #00ff99;
+      color: #00b894;
       font-weight: bold;
     }
 
@@ -99,7 +100,7 @@
       border-radius: 20px;
       text-decoration: none;
       font-weight: bold;
-      background: linear-gradient(270deg, #00ff99, #00ffd5);
+      background: linear-gradient(270deg, #1e90ff, #00b894);
       background-size: 400% 400%;
       color: #0b0b0b;
       transition: transform 0.3s, box-shadow 0.3s;
@@ -113,8 +114,39 @@
     }
 
     .buttons a:hover {
-      transform: scale(1.05) translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transform: scale(1.08) translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1.08) translateY(-5px); }
+      50% { transform: scale(1.12) translateY(-5px); }
+      100% { transform: scale(1.08) translateY(-5px); }
+    }
+
+    #contract-address {
+      position: relative;
+      color: #00b894;
+      font-weight: bold;
+    }
+
+    #contract-address::after {
+      content: "✨";
+      position: absolute;
+      animation: sparkle 1.5s linear infinite;
+      font-size: 1.2em;
+      top: -5px;
+      left: 0;
+      opacity: 0.7;
+    }
+
+    @keyframes sparkle {
+      0% { transform: translateX(0) scale(1); opacity:0.7; }
+      25% { transform: translateX(50%) scale(1.2); opacity:1; }
+      50% { transform: translateX(100%) scale(1); opacity:0.5; }
+      75% { transform: translateX(50%) scale(1.2); opacity:1; }
+      100% { transform: translateX(0) scale(1); opacity:0.7; }
     }
 
     button {
@@ -124,6 +156,47 @@
     button:hover {
       transform: translateY(-2px) scale(1.05);
       box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    }
+
+    /* LP Buyback Visual */
+    .lp-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .lp-step {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .lp-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #00b894;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #0b0b0b;
+      margin: 0 15px;
+      flex-shrink: 0;
+    }
+
+    .lp-arrow {
+      font-size: 2rem;
+      margin: 0 10px;
+      color: #00b894;
+    }
+
+    .lp-text {
+      font-size: 1.1rem;
+      max-width: 300px;
+      text-align: center;
     }
 
     footer {
@@ -136,6 +209,9 @@
       h1 { font-size: 2.2rem; }
       h2 { font-size: 1.6rem; }
       .buttons a { padding: 12px 25px; }
+      .lp-step { flex-direction: column; }
+      .lp-arrow { margin: 10px 0; }
+      .lp-text { max-width: 200px; }
     }
   </style>
 </head>
@@ -154,7 +230,7 @@
 
     <p>
       <strong>99% of LP</strong> is sourced from liquidity fees and used for buybacks —
-      because liquidity matters more than promises.
+      helping early investors profit fairly while supporting the community.
     </p>
 
     <!-- BUTTONS -->
@@ -174,14 +250,14 @@
           padding:12px 25px;
           border:none;
           border-radius:15px;
-          background: linear-gradient(270deg, #00ff99, #00ffd5);
+          background: linear-gradient(270deg, #1e90ff, #00b894);
           background-size: 400% 400%;
           color:#0b0b0b;
           font-weight:bold;
           cursor:pointer;
         " 
-        onmouseover="this.style.background='linear-gradient(270deg, #00cc77, #00e5c5)'" 
-        onmouseout="this.style.background='linear-gradient(270deg, #00ff99, #00ffd5)'">
+        onmouseover="this.style.background='linear-gradient(270deg, #1c78d6, #00a97f)'" 
+        onmouseout="this.style.background='linear-gradient(270deg, #1e90ff, #00b894)'">
         Copy Address
       </button>
     </div>
@@ -212,9 +288,26 @@
     </p>
 
     <p>
-      This is not about hype.<br>
-      It’s about patience, transparency, and community ownership.
+      By supporting each other and spreading the project, our community grows stronger,
+      helping all early investors benefit.
     </p>
+
+    <!-- LP BUYBACK VISUAL EXPLANATION -->
+    <h2>How LP Buybacks Work</h2>
+    <div class="lp-visual">
+      <div class="lp-step">
+        <div class="lp-circle">💰</div>
+        <div class="lp-arrow">→</div>
+        <div class="lp-circle">🏦</div>
+        <div class="lp-arrow">→</div>
+        <div class="lp-circle">🔄</div>
+      </div>
+      <div class="lp-step">
+        <div class="lp-text">Fees collected from buys/sells</div>
+        <div class="lp-text">Added to Liquidity Pool</div>
+        <div class="lp-text">Used for Buybacks → Supporting early investors</div>
+      </div>
+    </div>
 
     <!-- TRANSPARENCY -->
     <h2>Transparency</h2>
@@ -237,10 +330,10 @@
 
       <p><strong>Why should I trust this?</strong><br>
       You shouldn’t trust words. You should trust behavior.
-      Everything is public, simple, and slow on purpose.</p>
+      Everything is public, simple, and fair.</p>
 
       <p><strong>Is there a roadmap?</strong><br>
-      Yes — but we don’t overpromise. Utility comes after trust.</p>
+      Yes — utility comes after trust. Fair growth is our priority.</p>
     </div>
 
     <!-- ROADMAP -->
@@ -250,7 +343,7 @@
       Fair launch • Community growth • Transparency</p>
 
       <p><strong>Phase 2</strong><br>
-      Marketplace planning (Gaming & IoT) • Community feedback</p>
+      Marketplace planning (Gaming) • Community feedback</p>
 
       <p><strong>Phase 3</strong><br>
       Marketplace MVP • Long-term sustainability</p>
