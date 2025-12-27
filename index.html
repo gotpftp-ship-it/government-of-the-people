@@ -11,44 +11,69 @@
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(-45deg, #0f1c2f, #1b2a44, #0f1c2f);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
+      background: #000000;
       color: #f2f2f2;
       text-align: center;
     }
 
-    @keyframes gradientBG {
-      0% {background-position:0% 50%;}
-      50% {background-position:100% 50%;}
-      100% {background-position:0% 50%;}
-    }
-
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
       padding: 40px 20px;
-      position: relative;
     }
 
+    /* HERO WITH GLITCH EFFECT */
     h1 {
       font-size: 3rem;
       margin-bottom: 10px;
-      background: linear-gradient(90deg, #1e3c72, #2a5298);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradientText 3s ease infinite alternate;
+      position: relative;
+      color: #00ff6a;
+      font-weight: 700;
     }
 
-    @keyframes gradientText {
-      0% {background-position:0% 50%;}
-      100% {background-position:100% 50%;}
+    /* Glitch layers */
+    h1::before,
+    h1::after {
+      content: "Government of the People";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+    }
+
+    h1::before {
+      animation: glitchTop 2s infinite linear alternate-reverse;
+      color: #00ff6a;
+    }
+
+    h1::after {
+      animation: glitchBottom 1.8s infinite linear alternate-reverse;
+      color: #00cc55;
+    }
+
+    @keyframes glitchTop {
+      0% { clip: rect(0, 1000px, 5px, 0); transform: translate(-2px, -2px); }
+      20% { clip: rect(0, 1000px, 10px, 0); transform: translate(2px, 2px); }
+      40% { clip: rect(0, 1000px, 5px, 0); transform: translate(-2px, 1px); }
+      60% { clip: rect(0, 1000px, 8px, 0); transform: translate(1px, -1px); }
+      80% { clip: rect(0, 1000px, 5px, 0); transform: translate(-1px, 1px); }
+      100% { clip: rect(0, 1000px, 6px, 0); transform: translate(0, 0); }
+    }
+
+    @keyframes glitchBottom {
+      0% { clip: rect(5px, 1000px, 15px, 0); transform: translate(1px, 1px); }
+      20% { clip: rect(10px, 1000px, 15px, 0); transform: translate(-1px, -2px); }
+      40% { clip: rect(5px, 1000px, 15px, 0); transform: translate(2px, 1px); }
+      60% { clip: rect(8px, 1000px, 15px, 0); transform: translate(-2px, -1px); }
+      80% { clip: rect(5px, 1000px, 15px, 0); transform: translate(1px, 2px); }
+      100% { clip: rect(6px, 1000px, 15px, 0); transform: translate(0, 0); }
     }
 
     h2 {
       margin-top: 50px;
       font-size: 2rem;
-      color: #00b894;
+      color: #00ff6a;
     }
 
     p {
@@ -58,24 +83,25 @@
     }
 
     .highlight {
-      color: #00b894;
+      color: #00ff6a;
       font-weight: bold;
       font-size: 1.2rem;
     }
 
     .box {
-      background: rgba(26, 31, 44, 0.8);
+      background: #111111;
       padding: 25px;
       border-radius: 15px;
       margin-top: 25px;
       text-align: left;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 20px rgba(0,255,106,0.4);
       transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid #00ff6a;
     }
 
     .box:hover {
       transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+      box-shadow: 0 12px 30px rgba(0,255,106,0.6);
     }
 
     .box ul {
@@ -85,7 +111,7 @@
 
     .box ul li::before {
       content: "✓ ";
-      color: #00b894;
+      color: #00ff6a;
       font-weight: bold;
     }
 
@@ -100,62 +126,36 @@
       border-radius: 20px;
       text-decoration: none;
       font-weight: bold;
-      background: linear-gradient(270deg, #1e90ff, #00b894);
-      background-size: 400% 400%;
-      color: #0b0b0b;
+      background: linear-gradient(270deg, #00ff6a, #00cc55);
+      color: #000000;
       transition: transform 0.3s, box-shadow 0.3s;
-      animation: gradientButton 3s ease infinite;
-    }
-
-    @keyframes gradientButton {
-      0% {background-position:0% 50%;}
-      50% {background-position:100% 50%;}
-      100% {background-position:0% 50%;}
     }
 
     .buttons a:hover {
       transform: scale(1.08) translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-      animation: pulse 1.2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1.08) translateY(-5px); }
-      50% { transform: scale(1.12) translateY(-5px); }
-      100% { transform: scale(1.08) translateY(-5px); }
+      box-shadow: 0 12px 30px rgba(0,255,106,0.6);
     }
 
     #contract-address {
-      position: relative;
-      color: #00b894;
+      color: #00ff6a;
       font-weight: bold;
     }
 
-    #contract-address::after {
-      content: "✨";
-      position: absolute;
-      animation: sparkle 1.5s linear infinite;
-      font-size: 1.2em;
-      top: -5px;
-      left: 0;
-      opacity: 0.7;
-    }
-
-    @keyframes sparkle {
-      0% { transform: translateX(0) scale(1); opacity:0.7; }
-      25% { transform: translateX(50%) scale(1.2); opacity:1; }
-      50% { transform: translateX(100%) scale(1); opacity:0.5; }
-      75% { transform: translateX(50%) scale(1.2); opacity:1; }
-      100% { transform: translateX(0) scale(1); opacity:0.7; }
-    }
-
     button {
+      margin-top: 12px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 15px;
+      background: linear-gradient(270deg, #00ff6a, #00cc55);
+      color: #000000;
+      font-weight: bold;
+      cursor: pointer;
       transition: all 0.2s ease;
     }
 
     button:hover {
       transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      box-shadow: 0 6px 18px rgba(0,255,106,0.4);
     }
 
     /* LP Buyback Visual */
@@ -163,26 +163,27 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       margin-top: 30px;
     }
 
     .lp-step {
       display: flex;
       align-items: center;
-      margin: 20px 0;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
     }
 
     .lp-circle {
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background: #00b894;
+      background: #00ff6a;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: bold;
-      color: #0b0b0b;
+      color: #000000;
       margin: 0 15px;
       flex-shrink: 0;
     }
@@ -190,13 +191,22 @@
     .lp-arrow {
       font-size: 2rem;
       margin: 0 10px;
-      color: #00b894;
+      color: #00ff6a;
+    }
+
+    .lp-texts {
+      display: flex;
+      justify-content: space-between;
+      max-width: 600px;
+      margin-top: 10px;
+      flex-wrap: wrap;
     }
 
     .lp-text {
+      width: 180px;
       font-size: 1.1rem;
-      max-width: 300px;
       text-align: center;
+      margin: 10px;
     }
 
     footer {
@@ -211,8 +221,9 @@
       .buttons a { padding: 12px 25px; }
       .lp-step { flex-direction: column; }
       .lp-arrow { margin: 10px 0; }
-      .lp-text { max-width: 200px; }
+      .lp-text { width: 100%; max-width: 250px; margin: 5px 0; }
     }
+
   </style>
 </head>
 
@@ -245,34 +256,20 @@
       <p id="contract-address" style="word-break: break-all;">
         ARLAiomvL2HxoBNrawF2FoFMZKp3zFFJFN7Tq3bNpump
       </p>
-      <button onclick="copyAddress()" style="
-          margin-top:12px;
-          padding:12px 25px;
-          border:none;
-          border-radius:15px;
-          background: linear-gradient(270deg, #1e90ff, #00b894);
-          background-size: 400% 400%;
-          color:#0b0b0b;
-          font-weight:bold;
-          cursor:pointer;
-        " 
-        onmouseover="this.style.background='linear-gradient(270deg, #1c78d6, #00a97f)'" 
-        onmouseout="this.style.background='linear-gradient(270deg, #1e90ff, #00b894)'">
-        Copy Address
-      </button>
+      <button onclick="copyAddress()">Copy Address</button>
     </div>
 
     <script>
-    function copyAddress() {
-      const address = document.getElementById('contract-address').innerText;
-      navigator.clipboard.writeText(address).then(() => {
-        const btn = document.querySelector('button[onclick="copyAddress()"]');
-        btn.innerText = 'Copied!';
-        setTimeout(() => { btn.innerText = 'Copy Address'; }, 1500);
-      }).catch(() => {
-        alert('Failed to copy. Please copy manually.');
-      });
-    }
+      function copyAddress() {
+        const address = document.getElementById('contract-address').innerText;
+        navigator.clipboard.writeText(address).then(() => {
+          const btn = document.querySelector('button[onclick="copyAddress()"]');
+          btn.innerText = 'Copied!';
+          setTimeout(() => { btn.innerText = 'Copy Address'; }, 1500);
+        }).catch(() => {
+          alert('Failed to copy. Please copy manually.');
+        });
+      }
     </script>
 
     <!-- WHY -->
@@ -289,10 +286,10 @@
 
     <p>
       By supporting each other and spreading the project, our community grows stronger,
-      helping all early investors benefit.
+      helping all early investors benefit together.
     </p>
 
-    <!-- LP BUYBACK VISUAL EXPLANATION -->
+    <!-- LP BUYBACK VISUAL -->
     <h2>How LP Buybacks Work</h2>
     <div class="lp-visual">
       <div class="lp-step">
@@ -302,7 +299,7 @@
         <div class="lp-arrow">→</div>
         <div class="lp-circle">🔄</div>
       </div>
-      <div class="lp-step">
+      <div class="lp-texts">
         <div class="lp-text">Fees collected from buys/sells</div>
         <div class="lp-text">Added to Liquidity Pool</div>
         <div class="lp-text">Used for Buybacks → Supporting early investors</div>
