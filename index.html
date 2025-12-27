@@ -106,7 +106,7 @@
       <a href="https://pump.fun/coin/ARLAiomvL2HxoBNrawF2FoFMZKp3zFFJFN7Tq3bNpump" target="_blank">Buy on pump.fun</a>
       <a href="https://x.com/GovOfThePeopleX" target="_blank">Twitter / X</a>
     </div>
- <!-- CONTRACT ADDRESS -->
+<!-- CONTRACT ADDRESS -->
 <div class="box" style="text-align:center; margin-top:20px;">
   <p><strong>Contract Address:</strong></p>
   <p id="contract-address" style="word-break: break-all;">
@@ -121,8 +121,27 @@
       color:#0b0b0b;
       font-weight:bold;
       cursor:pointer;
-    ">Copy Address</button>
+      transition: background 0.2s ease;
+    " 
+    onmouseover="this.style.background='#00cc77'" 
+    onmouseout="this.style.background='#00ff99'">
+    Copy Address
+  </button>
 </div>
+
+<script>
+function copyAddress() {
+  const address = document.getElementById('contract-address').innerText;
+  navigator.clipboard.writeText(address).then(() => {
+    const btn = document.querySelector('button[onclick="copyAddress()"]');
+    btn.innerText = 'Copied!';
+    setTimeout(() => { btn.innerText = 'Copy Address'; }, 1500);
+  }).catch(() => {
+    alert('Failed to copy. Please copy manually.');
+  });
+}
+</script>
+
 
 <script>
 function copyAddress() {
