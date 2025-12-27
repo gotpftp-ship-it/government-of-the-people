@@ -8,18 +8,33 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+    /* BODY AND BACKGROUND */
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background: #000000;
       color: #f2f2f2;
       text-align: center;
+      background: #000000;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* MATRIX CODE RAIN */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
 
     .container {
       max-width: 1000px;
       margin: auto;
       padding: 40px 20px;
+      position: relative;
+      z-index: 2;
     }
 
     /* HERO WITH GLITCH EFFECT */
@@ -31,7 +46,6 @@
       font-weight: 700;
     }
 
-    /* Glitch layers */
     h1::before,
     h1::after {
       content: "Government of the People";
@@ -70,23 +84,9 @@
       100% { clip: rect(6px, 1000px, 15px, 0); transform: translate(0, 0); }
     }
 
-    h2 {
-      margin-top: 50px;
-      font-size: 2rem;
-      color: #00ff6a;
-    }
-
-    p {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      opacity: 0.95;
-    }
-
-    .highlight {
-      color: #00ff6a;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
+    h2 { margin-top: 50px; font-size: 2rem; color: #00ff6a; }
+    p { font-size: 1.15rem; line-height: 1.7; opacity: 0.95; }
+    .highlight { color: #00ff6a; font-weight: bold; font-size: 1.2rem; }
 
     .box {
       background: #111111;
@@ -99,26 +99,11 @@
       border: 1px solid #00ff6a;
     }
 
-    .box:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0,255,106,0.6);
-    }
+    .box:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,255,106,0.6); }
+    .box ul { list-style: none; padding: 0; }
+    .box ul li::before { content: "✓ "; color: #00ff6a; font-weight: bold; }
 
-    .box ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .box ul li::before {
-      content: "✓ ";
-      color: #00ff6a;
-      font-weight: bold;
-    }
-
-    .buttons {
-      margin-top: 35px;
-    }
-
+    .buttons { margin-top: 35px; }
     .buttons a {
       display: inline-block;
       margin: 10px;
@@ -130,16 +115,9 @@
       color: #000000;
       transition: transform 0.3s, box-shadow 0.3s;
     }
+    .buttons a:hover { transform: scale(1.08) translateY(-5px); box-shadow: 0 12px 30px rgba(0,255,106,0.6); }
 
-    .buttons a:hover {
-      transform: scale(1.08) translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0,255,106,0.6);
-    }
-
-    #contract-address {
-      color: #00ff6a;
-      font-weight: bold;
-    }
+    #contract-address { color: #00ff6a; font-weight: bold; }
 
     button {
       margin-top: 12px;
@@ -152,68 +130,21 @@
       cursor: pointer;
       transition: all 0.2s ease;
     }
-
-    button:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 6px 18px rgba(0,255,106,0.4);
-    }
+    button:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 6px 18px rgba(0,255,106,0.4); }
 
     /* LP Buyback Visual */
-    .lp-visual {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 30px;
-    }
-
-    .lp-step {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
+    .lp-visual { display: flex; flex-direction: column; align-items: center; margin-top: 30px; }
+    .lp-step { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
     .lp-circle {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: #00ff6a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      color: #000000;
-      margin: 0 15px;
-      flex-shrink: 0;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: #00ff6a; display: flex; align-items: center; justify-content: center;
+      font-weight: bold; color: #000000; margin: 0 15px; flex-shrink: 0;
     }
+    .lp-arrow { font-size: 2rem; margin: 0 10px; color: #00ff6a; }
+    .lp-texts { display: flex; justify-content: space-between; max-width: 600px; margin-top: 10px; flex-wrap: wrap; }
+    .lp-text { width: 180px; font-size: 1.1rem; text-align: center; margin: 10px; }
 
-    .lp-arrow {
-      font-size: 2rem;
-      margin: 0 10px;
-      color: #00ff6a;
-    }
-
-    .lp-texts {
-      display: flex;
-      justify-content: space-between;
-      max-width: 600px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-
-    .lp-text {
-      width: 180px;
-      font-size: 1.1rem;
-      text-align: center;
-      margin: 10px;
-    }
-
-    footer {
-      margin-top: 60px;
-      font-size: 1rem;
-      opacity: 0.7;
-    }
+    footer { margin-top: 60px; font-size: 1rem; opacity: 0.7; }
 
     @media screen and (max-width: 600px) {
       h1 { font-size: 2.2rem; }
@@ -223,11 +154,13 @@
       .lp-arrow { margin: 10px 0; }
       .lp-text { width: 100%; max-width: 250px; margin: 5px 0; }
     }
-
   </style>
 </head>
 
 <body>
+  <!-- MATRIX CANVAS -->
+  <canvas id="matrix"></canvas>
+
   <div class="container">
 
     <!-- HERO -->
@@ -258,19 +191,6 @@
       </p>
       <button onclick="copyAddress()">Copy Address</button>
     </div>
-
-    <script>
-      function copyAddress() {
-        const address = document.getElementById('contract-address').innerText;
-        navigator.clipboard.writeText(address).then(() => {
-          const btn = document.querySelector('button[onclick="copyAddress()"]');
-          btn.innerText = 'Copied!';
-          setTimeout(() => { btn.innerText = 'Copy Address'; }, 1500);
-        }).catch(() => {
-          alert('Failed to copy. Please copy manually.');
-        });
-      }
-    </script>
 
     <!-- WHY -->
     <h2>What is our Goal</h2>
@@ -353,5 +273,52 @@
     </footer>
 
   </div>
+
+  <script>
+    // COPY ADDRESS
+    function copyAddress() {
+      const address = document.getElementById('contract-address').innerText;
+      navigator.clipboard.writeText(address).then(() => {
+        const btn = document.querySelector('button[onclick="copyAddress()"]');
+        btn.innerText = 'Copied!';
+        setTimeout(() => { btn.innerText = 'Copy Address'; }, 1500);
+      }).catch(() => { alert('Failed to copy.'); });
+    }
+
+    // MATRIX CODE RAIN
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%';
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#00ff6a';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 50);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 </html>
