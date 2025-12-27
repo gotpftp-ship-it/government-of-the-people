@@ -1,360 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Government of the People</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Government of the People</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+body{margin:0;font-family:'Roboto',sans-serif;color:#f2f2f2;text-align:center;background:#000;overflow-x:hidden;position:relative;}
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+.container{max-width:1000px;margin:auto;padding:40px 20px;position:relative;z-index:2;}
+h1{font-size:3rem;margin-bottom:10px;position:relative;color:#00ff6a;font-weight:700;}
+h1::before,h1::after{content:"Government of the People";position:absolute;left:0;width:100%;overflow:hidden;clip:rect(0,900px,0,0);}
+h1::before{animation:glitchTop 2s infinite linear alternate-reverse;color:#00ff6a;}
+h1::after{animation:glitchBottom 1.8s infinite linear alternate-reverse;color:#00cc55;}
+@keyframes glitchTop{0%{clip:rect(0,1000px,5px,0);transform:translate(-2px,-2px);}20%{clip:rect(0,1000px,10px,0);transform:translate(2px,2px);}40%{clip:rect(0,1000px,5px,0);transform:translate(-2px,1px);}60%{clip:rect(0,1000px,8px,0);transform:translate(1px,-1px);}80%{clip:rect(0,1000px,5px,0);transform:translate(-1px,1px);}100%{clip:rect(0,1000px,6px,0);transform:translate(0,0);}}
+@keyframes glitchBottom{0%{clip:rect(5px,1000px,15px,0);transform:translate(1px,1px);}20%{clip:rect(10px,1000px,15px,0);transform:translate(-1px,-2px);}40%{clip:rect(5px,1000px,15px,0);transform:translate(2px,1px);}60%{clip:rect(8px,1000px,15px,0);transform:translate(-2px,-1px);}80%{clip:rect(5px,1000px,15px,0);transform:translate(1px,2px);}100%{clip:rect(6px,1000px,15px,0);transform:translate(0,0);}}
+h2{margin-top:50px;font-size:2rem;color:#00ff6a;}
+p{font-size:1.15rem;line-height:1.7;opacity:0.95;}
+.highlight{color:#00ff6a;font-weight:bold;font-size:1.2rem;}
+.box{background:#111;padding:25px;border-radius:15px;margin-top:25px;text-align:left;box-shadow:0 8px 20px rgba(0,255,106,0.4);transition:transform 0.3s,box-shadow 0.3s;border:1px solid #00ff6a;}
+.box:hover{transform:translateY(-5px);box-shadow:0 12px 30px rgba(0,255,106,0.6);}
+.box ul{list-style:none;padding:0;}
+.box ul li::before{content:"✓ ";color:#00ff6a;font-weight:bold;}
+.buttons{margin-top:35px;}
+.buttons a{display:inline-block;margin:10px;padding:16px 40px;border-radius:20px;text-decoration:none;font-weight:bold;background:linear-gradient(270deg,#00ff6a,#00cc55);color:#000;transition:transform 0.3s, box-shadow 0.3s;}
+.buttons a:hover{transform:scale(1.08) translateY(-5px);box-shadow:0 12px 30px rgba(0,255,106,0.6);}
+#contract-address{color:#00ff6a;font-weight:bold;}
+button{margin-top:12px;padding:12px 25px;border:none;border-radius:15px;background:linear-gradient(270deg,#00ff6a,#00cc55);color:#000;font-weight:bold;cursor:pointer;transition:all 0.2s ease;}
+button:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 6px 18px rgba(0,255,106,0.4);}
 
-    /* BODY AND BACKGROUND */
-    body {
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-      color: #f2f2f2;
-      text-align: center;
-      background: #000000;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 40px 20px;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* HERO GLITCH EFFECT */
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      position: relative;
-      color: #00ff6a;
-      font-weight: 700;
-    }
-
-    h1::before,
-    h1::after {
-      content: "Government of the People";
-      position: absolute;
-      left: 0;
-      width: 100%;
-      overflow: hidden;
-      clip: rect(0, 900px, 0, 0);
-    }
-
-    h1::before { animation: glitchTop 2s infinite linear alternate-reverse; color: #00ff6a; }
-    h1::after { animation: glitchBottom 1.8s infinite linear alternate-reverse; color: #00cc55; }
-
-    @keyframes glitchTop {
-      0% { clip: rect(0,1000px,5px,0); transform: translate(-2px,-2px); }
-      20% { clip: rect(0,1000px,10px,0); transform: translate(2px,2px); }
-      40% { clip: rect(0,1000px,5px,0); transform: translate(-2px,1px); }
-      60% { clip: rect(0,1000px,8px,0); transform: translate(1px,-1px); }
-      80% { clip: rect(0,1000px,5px,0); transform: translate(-1px,1px); }
-      100% { clip: rect(0,1000px,6px,0); transform: translate(0,0); }
-    }
-
-    @keyframes glitchBottom {
-      0% { clip: rect(5px,1000px,15px,0); transform: translate(1px,1px); }
-      20% { clip: rect(10px,1000px,15px,0); transform: translate(-1px,-2px); }
-      40% { clip: rect(5px,1000px,15px,0); transform: translate(2px,1px); }
-      60% { clip: rect(8px,1000px,15px,0); transform: translate(-2px,-1px); }
-      80% { clip: rect(5px,1000px,15px,0); transform: translate(1px,2px); }
-      100% { clip: rect(6px,1000px,15px,0); transform: translate(0,0); }
-    }
-
-    h2 { margin-top: 50px; font-size: 2rem; color: #00ff6a; }
-    p { font-size: 1.15rem; line-height: 1.7; opacity: 0.95; }
-    .highlight { color: #00ff6a; font-weight: bold; font-size: 1.2rem; }
-
-    .box {
-      background: #111111;
-      padding: 25px;
-      border-radius: 15px;
-      margin-top: 25px;
-      text-align: left;
-      box-shadow: 0 8px 20px rgba(0,255,106,0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-      border: 1px solid #00ff6a;
-    }
-
-    .box:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,255,106,0.6); }
-    .box ul { list-style: none; padding: 0; }
-    .box ul li::before { content: "✓ "; color: #00ff6a; font-weight: bold; }
-
-    .buttons { margin-top: 35px; }
-    .buttons a {
-      display: inline-block;
-      margin: 10px;
-      padding: 16px 40px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-weight: bold;
-      background: linear-gradient(270deg, #00ff6a, #00cc55);
-      color: #000000;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .buttons a:hover { transform: scale(1.08) translateY(-5px); box-shadow: 0 12px 30px rgba(0,255,106,0.6); }
-
-    #contract-address { color: #00ff6a; font-weight: bold; }
-
-    button {
-      margin-top: 12px;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 15px;
-      background: linear-gradient(270deg, #00ff6a, #00cc55);
-      color: #000000;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    button:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 6px 18px rgba(0,255,106,0.4); }
-
-    /* LP Buyback Visual */
-    .lp-visual { display: flex; flex-direction: column; align-items: center; margin-top: 30px; }
-    .lp-step { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
-    .lp-circle {
-      width: 60px; height: 60px; border-radius: 50%;
-      background: #00ff6a; display: flex; align-items: center; justify-content: center;
-      font-weight: bold; color: #000000; margin: 0 15px; flex-shrink: 0;
-      box-shadow: 0 0 15px #00ff6a;
-      animation: glow 2s infinite alternate;
-      position: relative;
-    }
-    .lp-circle:nth-child(1) { animation-delay: 0s; }
-    .lp-circle:nth-child(3) { animation-delay: 0.5s; }
-    .lp-circle:nth-child(5) { animation-delay: 1s; }
-
-    @keyframes glow {
-      0% { box-shadow: 0 0 10px #00ff6a, 0 0 20px #00ff6a; transform: scale(1); }
-      50% { box-shadow: 0 0 20px #00ff6a, 0 0 30px #00ff6a; transform: scale(1.1); }
-      100% { box-shadow: 0 0 10px #00ff6a, 0 0 20px #00ff6a; transform: scale(1); }
-    }
-
-    /* TOOLTIP */
-    .lp-circle:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: -50px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #00ff6a;
-      color: #000;
-      padding: 8px 12px;
-      border-radius: 8px;
-      white-space: nowrap;
-      font-size: 0.9rem;
-      font-weight: bold;
-      opacity: 0.95;
-      box-shadow: 0 0 15px rgba(0,255,106,0.6);
-    }
-
-    .lp-arrow {
-      font-size: 2rem;
-      margin: 0 10px;
-      color: #00ff6a;
-      animation: pulse 1.5s infinite;
-    }
-    .lp-arrow:nth-child(2) { animation-delay: 0s; }
-    .lp-arrow:nth-child(4) { animation-delay: 0.5s; }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.6; }
-      50% { transform: scale(1.3); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.6; }
-    }
-
-    .lp-texts { display: flex; justify-content: space-between; max-width: 600px; margin-top: 10px; flex-wrap: wrap; }
-    .lp-text { width: 180px; font-size: 1.1rem; text-align: center; margin: 10px; }
-
-    footer { margin-top: 60px; font-size: 1rem; opacity: 0.7; }
-
-    @media screen and (max-width: 600px) {
-      h1 { font-size: 2.2rem; }
-      h2 { font-size: 1.6rem; }
-      .buttons a { padding: 12px 25px; }
-      .lp-step { flex-direction: column; }
-      .lp-arrow { margin: 10px 0; }
-      .lp-text { width: 100%; max-width: 250px; margin: 5px 0; }
-    }
-  </style>
+/* LP Buyback Visual */
+.lp-visual{display:flex;flex-direction:column;align-items:center;margin-top:30px;}
+.lp-step{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:10px;position:relative;}
+.lp-circle{width:60px;height:60px;border-radius:50%;background:#00ff6a;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#000;margin:0 15px;flex-shrink:0;box-shadow:0 0 15px #00ff6a;position:relative;cursor:pointer;}
+.lp-circle:nth-child(1){animation:glow 2s infinite alternate;}
+.lp-circle:nth-child(3){animation:glow 2s infinite alternate 0.5s;}
+.lp-circle:nth-child(5){animation:glow 2s infinite alternate 1s;}
+@keyframes glow{0%{box-shadow:0 0 10px #00ff6a,0 0 20px #00ff6a;transform:scale(1);}50%{box-shadow:0 0 20px #00ff6a,0 0 30px #00ff6a;transform:scale(1.1);}100%{box-shadow:0 0 10px #00ff6a,0 0 20px #00ff6a;transform:scale(1);}}
+.lp-circle::after{content:"";position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);background:#00ff6a;color:#000;padding:8px 12px;border-radius:8px;font-size:0.9rem;font-weight:bold;opacity:0;pointer-events:none;transition:opacity 0.3s;white-space:nowrap;}
+.lp-circle:hover::after{opacity:0.95;}
+.lp-arrow{font-size:2rem;margin:0 10px;color:#00ff6a;animation:pulse 1.5s infinite;}
+.lp-arrow:nth-child(2){animation-delay:0s;}
+.lp-arrow:nth-child(4){animation-delay:0.5s;}
+@keyframes pulse{0%{transform:scale(1);opacity:0.6;}50%{transform:scale(1.3);opacity:1;}100%{transform:scale(1);opacity:0.6;}}
+.lp-texts{display:flex;justify-content:space-between;max-width:600px;margin-top:10px;flex-wrap:wrap;}
+.lp-text{width:180px;font-size:1.1rem;text-align:center;margin:10px;opacity:0.4;transition:opacity 0.5s, transform 0.5s;position:relative;}
+.token-dot{width:10px;height:10px;background:#00ff6a;border-radius:50%;position:absolute;top:50%;left:0;transform:translate(-50%,-50%);}
+footer{margin-top:60px;font-size:1rem;opacity:0.7;}
+@media screen and (max-width:600px){h1{font-size:2.2rem;}h2{font-size:1.6rem;}.buttons a{padding:12px 25px;}.lp-step{flex-direction:column;}.lp-arrow{margin:10px 0;}.lp-text{width:100%;max-width:250px;margin:5px 0;}}
+</style>
 </head>
-
 <body>
-  <!-- MATRIX CANVAS -->
-  <canvas id="matrix"></canvas>
+<canvas id="matrix"></canvas>
+<div class="container">
+<h1>Government of the People</h1>
+<p class="highlight">From the people. To the people.</p>
+<p>A community-driven crypto project built for regular people.<br>No insiders. No VC. No hidden allocations.</p>
+<p><strong>99% of LP</strong> is sourced from liquidity fees and used for buybacks — helping early investors profit fairly while supporting the community.</p>
 
-  <div class="container">
+<div class="buttons">
+<a href="https://pump.fun/coin/ARLAiomvL2HxoBNrawF2FoFMZKp3zFFJFN7Tq3bNpump" target="_blank">Buy on pump.fun</a>
+<a href="https://x.com/GovOfThePeopleX" target="_blank">Twitter / X</a>
+</div>
 
-    <!-- HERO -->
-    <h1>Government of the People</h1>
-    <p class="highlight">From the people. To the people.</p>
+<div class="box" style="text-align:center; margin-top:25px;">
+<p><strong>Contract Address:</strong></p>
+<p id="contract-address" style="word-break: break-all;">ARLAiomvL2HxoBNrawF2FoFMZKp3zFFJFN7Tq3bNpump</p>
+<button onclick="copyAddress()">Copy Address</button>
+</div>
 
-    <p>
-      A community-driven crypto project built for regular people.<br>
-      No insiders. No VC. No hidden allocations.
-    </p>
+<h2>What is our Goal</h2>
+<p>Most crypto projects are designed to extract value from late buyers. This one exists to do the opposite.</p>
+<p>Government of the People was created for those who never get early, never get insider info, and never get a fair chance.</p>
+<p>By supporting each other and spreading the project, our community grows stronger, helping all early investors benefit together.</p>
 
-    <p>
-      <strong>99% of LP</strong> is sourced from liquidity fees and used for buybacks —
-      helping early investors profit fairly while supporting the community.
-    </p>
+<h2>How LP Buybacks Work</h2>
+<div class="lp-visual">
+<div class="lp-step" id="lpStep">
+  <div class="lp-circle" data-tooltip="Fees from every buy/sell are collected">💰</div>
+  <div class="lp-arrow">→</div>
+  <div class="lp-circle" data-tooltip="Added to the Liquidity Pool to stabilize price">🏦</div>
+  <div class="lp-arrow">→</div>
+  <div class="lp-circle" data-tooltip="Used to buy back tokens supporting early investors">🔄</div>
+</div>
+<div class="lp-texts">
+  <div class="lp-text" id="text1">Fees collected from buys/sells</div>
+  <div class="lp-text" id="text2">Added to Liquidity Pool</div>
+  <div class="lp-text" id="text3">Used for Buybacks → Supporting early investors</div>
+</div>
+</div>
 
-    <!-- BUTTONS -->
-    <div class="buttons">
-      <a href="https://pump.fun/coin/ARLAiomvL2HxoBNrawF2FoFMZKp3zFFJFN7Tq3bNpump" target="_blank">Buy on pump.fun</a>
-      <a href="https://x.com/GovOfThePeopleX" target="_blank">Twitter / X</a>
-    </div>
+<h2>Transparency</h2>
+<div class="box">
+<ul>
+<li>No VC funding</li>
+<li>No insider wallets</li>
+<li>No private allocations</li>
+<li>LP sourced from fees</li>
+<li>Buybacks only — no manipulation</li>
+</ul>
+</div>
 
-    <!-- CONTRACT ADDRESS -->
-    <div class="box" style="text-align:center; margin-top:25px;">
-      <p><strong>Contract Address:</strong></p>
-      <p id="contract-address" style="word-break: break-all;">
-        ARLAiomvL2HxoBNrawF2FoFMZKp3zFFJFN7Tq3bNpump
-      </p>
-      <button onclick="copyAddress()">Copy Address</button>
-    </div>
+<h2>FAQ</h2>
+<div class="box">
+<p><strong>Is this a rug?</strong><br>No. There are no insiders, no VC wallets, and no private allocations. Liquidity is sourced from fees and used for buybacks — not extraction.</p>
+<p><strong>Why should I trust this?</strong><br>You shouldn’t trust words. You should trust behavior. Everything is public, simple, and fair.</p>
+<p><strong>Is there a roadmap?</strong><br>Yes — utility comes after trust. Fair growth is our priority.</p>
+</div>
 
-    <!-- WHY -->
-    <h2>What is our Goal</h2>
-    <p>
-      Most crypto projects are designed to extract value from late buyers.
-      This one exists to do the opposite.
-    </p>
+<h2>Roadmap</h2>
+<div class="box">
+<p><strong>Phase 1</strong><br>Fair launch • Community growth • Transparency</p>
+<p><strong>Phase 2</strong><br>Marketplace planning (Gaming) • Community feedback</p>
+<p><strong>Phase 3</strong><br>Marketplace MVP • Long-term sustainability</p>
+</div>
 
-    <p>
-      Government of the People was created for those who never get early,
-      never get insider info, and never get a fair chance.
-    </p>
+<footer>Built by regular people — for regular people.<br>Small plebs. Big patience.</footer>
+</div>
 
-    <p>
-      By supporting each other and spreading the project, our community grows stronger,
-      helping all early investors benefit together.
-    </p>
+<script>
+function copyAddress(){
+  const address=document.getElementById('contract-address').innerText;
+  navigator.clipboard.writeText(address).then(()=>{const btn=document.querySelector('button[onclick="copyAddress()"]'); btn.innerText='Copied!'; setTimeout(()=>{btn.innerText='Copy Address';},1500);}).catch(()=>{alert('Failed to copy.');});
+}
 
-    <!-- LP BUYBACK VISUAL -->
-    <h2>How LP Buybacks Work</h2>
-    <div class="lp-visual">
-      <div class="lp-step">
-        <div class="lp-circle" data-tooltip="Fees from every buy/sell are collected">💰</div>
-        <div class="lp-arrow">→</div>
-        <div class="lp-circle" data-tooltip="Added to the Liquidity Pool to stabilize price">🏦</div>
-        <div class="lp-arrow">→</div>
-        <div class="lp-circle" data-tooltip="Used to buy back tokens supporting early investors">🔄</div>
-      </div>
-      <div class="lp-texts">
-        <div class="lp-text">Fees collected from buys/sells</div>
-        <div class="lp-text">Added to Liquidity Pool</div>
-        <div class="lp-text">Used for Buybacks → Supporting early investors</div>
-      </div>
-    </div>
+// MATRIX CODE
+const canvas=document.getElementById('matrix');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+const letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%';
+const fontSize=16;
+const columns=canvas.width/fontSize;
+const drops=Array(Math.floor(columns)).fill(1);
+function draw(){ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#00ff6a';ctx.font=fontSize+'px monospace';for(let i=0;i<drops.length;i++){const text=letters.charAt(Math.floor(Math.random()*letters.length));ctx.fillText(text,i*fontSize,drops[i]*fontSize);if(drops[i]*fontSize>canvas.height&&Math.random()>0.975){drops[i]=0;}drops[i]++;}
+}
+setInterval(draw,50);
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
 
-    <!-- TRANSPARENCY -->
-    <h2>Transparency</h2>
-    <div class="box">
-      <ul>
-        <li>No VC funding</li>
-        <li>No insider wallets</li>
-        <li>No private allocations</li>
-        <li>LP sourced from fees</li>
-        <li>Buybacks only — no manipulation</li>
-      </ul>
-    </div>
+// LP Text Animation
+const texts = [document.getElementById('text1'),document.getElementById('text2'),document.getElementById('text3')];
+let current=0;
+setInterval(()=>{texts.forEach((t,i)=>{t.style.opacity=(i===current?1:0.4);t.style.transform=(i===current?'translateY(-5px)':'translateY(0)');});current=(current+1)%texts.length;},1500);
 
-    <!-- FAQ -->
-    <h2>FAQ</h2>
-    <div class="box">
-      <p><strong>Is this a rug?</strong><br>
-      No. There are no insiders, no VC wallets, and no private allocations.
-      Liquidity is sourced from fees and used for buybacks — not extraction.</p>
+// TOKEN DOT ANIMATION
+const lpStep=document.getElementById('lpStep');
+const circles=lpStep.querySelectorAll('.lp-circle');
+const dots=[];
 
-      <p><strong>Why should I trust this?</strong><br>
-      You shouldn’t trust words. You should trust behavior.
-      Everything is public, simple, and fair.</p>
+for(let i=0;i<3;i++){
+  const dot=document.createElement('div');
+  dot.className='token-dot';
+  lpStep.appendChild(dot);
+  dots.push({el:dot,pos:0});
+}
 
-      <p><strong>Is there a roadmap?</strong><br>
-      Yes — utility comes after trust. Fair growth is our priority.</p>
-    </div>
-
-    <!-- ROADMAP -->
-    <h2>Roadmap</h2>
-    <div class="box">
-      <p><strong>Phase 1</strong><br>
-      Fair launch • Community growth • Transparency</p>
-
-      <p><strong>Phase 2</strong><br>
-      Marketplace planning (Gaming) • Community feedback</p>
-
-      <p><strong>Phase 3</strong><br>
-      Marketplace MVP • Long-term sustainability</p>
-    </div>
-
-    <footer>
-      Built by regular people — for regular people.<br>
-      Small plebs. Big patience.
-    </footer>
-
-  </div>
-
-  <script>
-    // COPY ADDRESS
-    function copyAddress() {
-      const address = document.getElementById('contract-address').innerText;
-      navigator.clipboard.writeText(address).then(() => {
-        const btn = document.querySelector('button[onclick="copyAddress()"]');
-        btn.innerText = 'Copied!';
-        setTimeout(() => { btn.innerText = 'Copy Address'; }, 1500);
-      }).catch(() => { alert('Failed to copy.'); });
-    }
-
-    // MATRIX CODE RAIN
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%';
-    const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-
-    function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = '#00ff6a';
-      ctx.font = fontSize + 'px monospace';
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = letters.charAt(Math.floor(Math.random() * letters.length));
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    }
-
-    setInterval(draw, 50);
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-  </script>
+function animateTokens(){
+  const positions=[circles[0].offsetLeft,circles[2].offsetLeft,circles[4].offsetLeft];
+  dots.forEach((d,i)=>{
+    d.pos+=2;
+    if(d.pos>positions[i]+60){d.pos=positions[i];}
+    d.el.style.left=d.pos+'px';
+  });
+  requestAnimationFrame(animateTokens);
+}
+requestAnimationFrame(animateTokens);
+</script>
 </body>
 </html>
